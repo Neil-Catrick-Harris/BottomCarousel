@@ -2,6 +2,7 @@ const db = require('./index.js');
 const faker = require('faker');
 const Furniture = require('./Furniture.js');
 const coolImages = require('cool-images');
+const mongoose = require('mongoose')
 
 //use faker.js to generate random data
 //create 100 copies of sample furniture
@@ -31,7 +32,8 @@ Furniture.insertMany(furnitureArr, (error, data) => {
     if (error) {
         console.log(error);
     } else {
-        console.log(`Successfully stored ${data.length} items into the database!`);
+        console.log(`Successfully stored ${data.length} items into the database!`)
+        mongoose.disconnect();
     }
 });
 
