@@ -6,7 +6,8 @@
   "scripts": {
     "server-dev": "nodemon server/server.js",
     "react-dev": "webpack -d --watch",
-    "db:setup": "node database-mongodb/seed.js",
+    "dataGen": "node database-mongodb/CsvGens/CsvGen.js",
+    "db:setup": "node --max-old-space-size=8192 database-mongodb/seed.js",
     "test": "jest --detectOpenHandles"
   },
   "repository": {
@@ -23,9 +24,7 @@
     "axios": "^0.20.0",
     "babel": "^6.23.0",
     "babel-loader": "^8.1.0",
-    "cool-images": "^1.0.3",
     "express": "^4.17.1",
-    "faker": "^5.1.0",
     "file-loader": "^6.1.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.7",
