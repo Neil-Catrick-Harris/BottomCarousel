@@ -23,4 +23,4 @@ CRUD Endpoints: Added/Modified by Juan Vargas
 
 4. Delete (DELETE): '/api/similarProducts/products/:id' 
     1. Will search the database for products with the provided (id) not (_id) and delete them
-    2. e.g.  DELETE request to '/api/similarProducts/products/6' will delete all products with that id 
+    2. e.g.  DELETE request to '/api/similarProducts/products/6' will delete all products with id = 6
