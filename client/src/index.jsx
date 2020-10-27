@@ -41,6 +41,8 @@ class App extends React.Component {
               this.setState({
                   items: data
               });
+          }).catch(error => {
+              console.error(error)
           })
     }
 

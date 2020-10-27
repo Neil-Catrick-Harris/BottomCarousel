@@ -1,6 +1,7 @@
 console.log('we writing boyzzzz......')
-const begTime = new Date()
+const begTime = new Date();
 const fs = require('fs');
+const coolImages = require("cool-images");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -10,30 +11,32 @@ function randomBool(){
     return boolArr[getRandomInt(0, 1)]
 }
 
-
-const writeUsers = fs.createWriteStream('10MillionRecords!.csv');
-writeUsers.write('id,name,category,price,rating,imageUrl,onSale\n', 'utf8');
+let _id = 0
+const writeUsers = fs.createWriteStream('10MillionKS.csv');
+writeUsers.write('_id,ID,name,category,price,rating,imageUrl,onSale\n', 'utf8');
 
 function writeTenMillionUsers(writer, encoding, callback) {
     let i = 10000000;
-    let id = 0;
+    let ID = 0;
     function write() {
       let ok = true;
       do {
         i -= 1;
-        id += 1;
+        ID += 1;
         function dataMult (num) {
             let result;
             for (var a = 0; a < num; a++ ) {
                 if (!result) {
-                    result = `${id},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${`https://unsplash.it/500/300?image=${getRandomInt(0, 1000)}`},${randomBool()}\n`
+                  _id++
+                    result = `${_id},${ID},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${coolImages.one()},${randomBool()}\n`
                 } else {
-                    result +=`${id},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${`https://unsplash.it/500/300?image=${getRandomInt(0, 1000)}`},${randomBool()}\n`
+                  _id++
+                    result +=`${_id},${ID},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${coolImages.one()},${randomBool()}\n`
                 }
             }
             return result
         }
-        let data = `${dataMult(10)}`;
+        let data = `${dataMult(7)}`;
         if (i === 0) {
           writer.write(data, encoding, callback);
         } else {
@@ -51,6 +54,7 @@ function writeTenMillionUsers(writer, encoding, callback) {
     writeUsers.end();
     let endTime = new Date()
     console.log('Ayyyyy we did it! it took aproximately', ((endTime - begTime)/60000).toFixed(2), 'mins')
+    console.log('_id', _id)
   });
 
 
