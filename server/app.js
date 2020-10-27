@@ -1,32 +1,62 @@
+const newRelic = require('newrelic')
+const cassandra = require('cassandra-driver');
+const PlainTextAuthProvider = cassandra.auth.PlainTextAuthProvider;
+const client = new cassandra.Client({
+    contactPoints:['127.0.0.1:9042'],
+    localDataCenter: 'datacenter1',
+    authProvider: new PlainTextAuthProvider('cassandra', 'cassandra')
+})
 const express = require('express');
-const Furniture = require('../database-mongodb/Furniture');
 const app = express();
 const path = require('path');
+const queryMaker = require('../database-cassandra/Query');
+const { query } = require('express');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.get('/api/similarProducts/products/:id', (request, response) => {
-    Furniture.find({id: request.params.id})
-        .then((res) => {
-            response.json(res);
+    const infoHolder = []
+    queryMaker(request.params.id).forEach(query => {
+        client.execute(query, (error, res) => {
+            if (error) {
+                console.error('error:', error)
+                response.end('there was an error:', error)
+            } else {
+                res.rows[0].rating = parseFloat(res.rows[0].rating)
+                res.rows[0].imageUrl = res.rows[0].imageurl
+                infoHolder.push(res.rows[0])
+                if (infoHolder.length === 10) {
+                    response.json(infoHolder)
+                }
+
+            }
         })
-        .catch((error) => {
-            response.end(error);
-        });
+
+    })
 });
 
 app.post('/api/similarProducts/products/:id', (request, response) => {
-    Furniture.create({id: request.params.id, name:'Cat Picture', category: 'animal', price: 250, rating: 4, imageUrl:'this url didnt work', onSale: true})
-    .then((res) => {
-        console.log('succes!', res)
-        response.end()
+    let query = `INSERT into furniturespace.furniture ("_id", ID, name) VALUES (${request.params.id}, 52,  \'meowri\');`
+    client.execute(query, (error, res) => {
+        if (error) {
+            console.error('error:', error)
+            response.end('there was an error:', error)
+        } else {
+            console.log('added or replaced')
+            response.end()
+        }
     })
-    .catch(error => {
-        console.log(error)
-        response.end()
-    })
+    // Furniture.create({id: request.params.id, name:'Cat Picture', category: 'animal', price: 250, rating: 4, imageUrl:'this url didnt work', onSale: true})
+    // .then((res) => {
+    //     console.log('succes!', res)
+    //     response.end()
+    // })
+    // .catch(error => {
+    //     console.log(error)
+    //     response.end()
+    // })
 })
 app.patch('/api/similarProducts/products/:id', (request, response) => {
     Furniture.updateMany({id: request.params.id}, {onSale: false})
