@@ -2,6 +2,6 @@ node_modules
 bundle.js
 10MillionKs.csv
 package-lock.json
-newrelic
+newrelic.js
 k6
 10.csv
