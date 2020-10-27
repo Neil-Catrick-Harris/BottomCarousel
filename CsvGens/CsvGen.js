@@ -36,7 +36,7 @@ function writeTenMillionUsers(writer, encoding, callback) {
             }
             return result
         }
-        let data = `${dataMult(7)}`;
+        let data = `${dataMult(5)}`;
         if (i === 0) {
           writer.write(data, encoding, callback);
         } else {
