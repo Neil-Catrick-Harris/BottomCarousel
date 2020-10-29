@@ -24,7 +24,7 @@ client.execute(query1, (error, res) => {
                         console.log('error:', error)
                     } else {
                         console.log('table created!')
-                       console.log('now go into cqlsh and run this command: COPY furnitureSpace.furniture ("_id", ID, name, category, price, rating, imageUrl, onSale) FROM \'/Users/juanvargas/Desktop/SDC/BottomCarousel/10MillionKs.csv\' WITH HEADER=TRUE AND PAGETIMEOUT=40 AND PAGESIZE=20 AND NUMPROCESSES=5;')
+                       console.log('now go into cqlsh and run this command: COPY furnitureSpace.furniture ("_id", ID, name, category, price, rating, imageUrl, onSale) FROM \'/Users/juanvargas/Desktop/SDC/BottomCarousel/10MillionKS.csv\' WITH HEADER=TRUE AND PAGETIMEOUT=40 AND PAGESIZE=20 AND MAXATTEMPTS=999 AND MAXINSERTERRORS=-1 AND MAXPARSEERRORS=-1;')
                     }
                 })
             }
