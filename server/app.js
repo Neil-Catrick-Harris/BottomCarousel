@@ -34,6 +34,7 @@ app.get('/api/similarProducts/products/:id', (request, response) => {
                 }
                 if (counter === querys.length) {
                     response.json(infoHolder)
+                    response.end()
                 }
             }
         })
