@@ -30,8 +30,8 @@ app.get('/api/similarProducts/products/:id', (request, response) => {
                     res.rows[0].rating = parseFloat(res.rows[0].rating)
                     res.rows[0].imageUrl = res.rows[0].imageurl
                     infoHolder.push(res.rows[0])
-                    counter++
                 }
+                counter++
                 if (counter === querys.length) {
                     response.json(infoHolder)
                     response.end()
