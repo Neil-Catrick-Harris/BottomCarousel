@@ -18,7 +18,9 @@ app.use(express.json());
 
 app.get('/api/similarProducts/products/:id', (request, response) => {
     const infoHolder = []
-    queryMaker(request.params.id).forEach(query => {
+    let counter = 0
+    let querys = queryMaker(request.params.id)
+    querys.forEach(query => {
         client.execute(query, (error, res) => {
             if (error) {
                 console.error('error:', error)
@@ -28,14 +30,15 @@ app.get('/api/similarProducts/products/:id', (request, response) => {
                     res.rows[0].rating = parseFloat(res.rows[0].rating)
                     res.rows[0].imageUrl = res.rows[0].imageurl
                     infoHolder.push(res.rows[0])
-                    if (infoHolder.length === 10) {
-                        response.json(infoHolder)
-                    }
+                    counter++
+                }
+                if (counter === querys.length) {
+                    response.json(infoHolder)
                 }
             }
         })
-
     })
+    
 });
 
 app.post('/api/similarProducts/products/:id', (request, response) => {
