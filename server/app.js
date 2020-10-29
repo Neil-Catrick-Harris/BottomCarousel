@@ -24,7 +24,7 @@ app.get('/api/similarProducts/products/:id', (request, response) => {
                 console.error('error:', error)
                 response.end('there was an error:', error)
             } else {
-                if (res.rows[0].name.length > 0) {
+                if (res.rows[0].name !== undefined) {
                     res.rows[0].rating = parseFloat(res.rows[0].rating)
                     res.rows[0].imageUrl = res.rows[0].imageurl
                     infoHolder.push(res.rows[0])
