@@ -48,15 +48,6 @@ app.post('/api/similarProducts/products/:id', (request, response) => {
             response.end()
         }
     })
-    // Furniture.create({id: request.params.id, name:'Cat Picture', category: 'animal', price: 250, rating: 4, imageUrl:'this url didnt work', onSale: true})
-    // .then((res) => {
-    //     console.log('succes!', res)
-    //     response.end()
-    // })
-    // .catch(error => {
-    //     console.log(error)
-    //     response.end()
-    // })
 })
 app.patch('/api/similarProducts/products/:id', (request, response) => {
     Furniture.updateMany({id: request.params.id}, {onSale: false})
