@@ -11,7 +11,7 @@ const Item = styled.div`
 
 const Image = styled.img`
     width: 220px;
-    height: 180px;
+    height: 150px;
 `;
 
 const Title = styled.div`
