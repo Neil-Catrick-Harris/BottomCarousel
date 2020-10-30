@@ -1,7 +1,6 @@
 console.log('we writing boyzzzz......')
 const begTime = new Date();
 const fs = require('fs');
-const coolImages = require("cool-images");
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -28,15 +27,15 @@ function writeTenMillionUsers(writer, encoding, callback) {
             for (var a = 0; a < num; a++ ) {
                 if (!result) {
                   _id++
-                    result = `${_id},${ID},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${coolImages.one()},${randomBool()}\n`
+                    result = `${_id},${ID},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${imageProdGen()},${randomBool()}\n`
                 } else {
                   _id++
-                    result +=`${_id},${ID},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${coolImages.one()},${randomBool()}\n`
+                    result +=`${_id},${ID},${fakeNameGen()},${fakeProdGen()},${getRandomInt(20, 300)},${(Math.random() * (5 - 1 + 1) + 1).toFixed(2)},${imageProdGen()},${randomBool()}\n`
                 }
             }
             return result
         }
-        let data = `${dataMult(7)}`;
+        let data = `${dataMult(10)}`;
         if (i === 0) {
           writer.write(data, encoding, callback);
         } else {
@@ -269,4 +268,40 @@ function fakeProdGen() {
         ]
     
     return arr[getRandomInt(0, 100)]
+}
+
+function imageProdGen() {
+  let arr = [
+    "https://i.imgur.com/Fze9kjL.jpg",
+    "https://i.imgur.com/hX3S8cM.jpg",
+    "https://i.imgur.com/cNAOtOu.jpg",
+    "https://i.imgur.com/3dJVGjM.jpg",
+    "https://i.imgur.com/fVoA18M.jpg",
+    "https://i.imgur.com/5U9BzjW.jpg",
+    "https://i.imgur.com/iWUHfZE.jpg",
+    "https://i.imgur.com/5nL3fbT.jpg",
+    "https://i.imgur.com/bQsFzeU.jpg",
+    "https://i.imgur.com/xyV0m3D.jpg",
+    "https://i.imgur.com/3tQrQNU.jpg",
+    "https://i.imgur.com/aBodNkl.jpg",
+    "https://i.imgur.com/R2JfFPC.jpg",
+    "https://i.imgur.com/oF0Bbxv.jpg",
+    "https://i.imgur.com/kJcVzu6.jpg",
+    "https://i.imgur.com/HYWKZuf.jpg",
+    "https://i.imgur.com/hr0COal.jpg",
+    "https://i.imgur.com/RbAX3WR.jpg",
+    "https://i.imgur.com/sSYgRY5.jpg",
+    "https://i.imgur.com/JYpLVwk.jpg",
+    "https://i.imgur.com/ZUh8imB.jpg",
+    "https://i.imgur.com/E41l1js.jpg",
+    "https://i.imgur.com/9mpvtAk.jpg",
+    "https://i.imgur.com/5udjEo2.jpg",
+    "https://i.imgur.com/dlOSGSD.jpg",
+    "https://i.imgur.com/RG9oMBX.jpg",
+    "https://i.imgur.com/zTLM8T1.jpg",
+    "https://i.imgur.com/27fRVpt.jpg",
+    "https://i.imgur.com/HUgGFiH.jpg",
+    "https://i.imgur.com/FR5tPS8.jpg"
+  ]
+  return arr[getRandomInt(0, 30)]
 }
